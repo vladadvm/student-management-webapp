@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Dodavanje studenta</title>
+<link 
+	rel="stylesheet" 
+	type="text/css"
+	href="../css/style.css"
+/>
+</head>
+<body>
+
+	<h1>DODAVANJE STUDENTA</h1>
+	
+	<div class = "slikaProfesor">
+	
+		<p>Klik na sliku za vracanje nazad.</p>
+		<a href = "../jsp_files/profesorPage.jsp">
+			<img src = "../images/download.jpg" alt = "profesor" />
+		</a>
+		
+		<form action = "../DodajStudentController" method = "get">
+		
+			IME			  <input type = "text" name = "ime" required><br><br>
+			PREZIME		  <input type = "text" name = "prezime" required><br><br>
+			BROJ INDEKSA  <input type = "text" name = "brojIndeksa" required><br><br> 		
+			GRUPA		  <input type = "text" name = "grupa" required><br><br>
+			POL           <input type="radio" id="male" name="pol" value="M" required>
+						  <label for="male">M</label>
+						  <input type="radio" id="female"name="pol" value="Z" required>
+						  <label for="male">Z</label><br><br>
+						  <input type = "submit" value = "DODAJ">
+		</form>
+		
+	</div>
+</body>
+</html>

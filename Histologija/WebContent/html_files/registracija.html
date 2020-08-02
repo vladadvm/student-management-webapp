@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registracija</title>
+<link 
+	rel="stylesheet" 
+	type="text/css"
+	href="../css/style.css"
+>
+</head>
+<body>
+
+	<h1>Dobrodosli na registraciju.</h1>
+
+	<a href = "../index.html"><button>Vrati me na pocetnu stranu</button></a> <br><br>
+	
+	<div id = "main_div">
+	
+		<form action="../RegistrationController" method="get">  
+		
+			Unesite ime:  <input type="text" name = "ime"><br><br> 
+			Unesite prezime: <input type="text" name = "prezime"><br><br>
+			Unesite username: <input type="text" name = "username"><br><br>
+			<p>
+				Password mora biti duzi od 8, a kraci od 15	karaktera, mora sadrzati bar jedno veliko slovo,
+				bar jedno malo slovo, bar jedan broj i jedan od sledecih znakova @#$%.
+			</p>															
+			Unesite password:  <input type="password" name = "password"><br><br>
+			Ponovite password: <input type="password" name = "repeatedPassword"><br><br>		
+			
+			<input type="submit" value="Registruj me">
+							
+		
+		</form>
+	
+	</div>
+
+</body>
+</html>
