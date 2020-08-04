@@ -2,12 +2,13 @@ package service;
 
 import dao.UpdateIspitDAO;
 import model.Ispit;
-import validacija.Validacija;
+import razno.Common;
+
 
 public class UpdateIspitService {
 	
 	UpdateIspitDAO dao = new UpdateIspitDAO();
-	Validacija validacija = new Validacija();
+	Common common = new Common();
 
 	public Ispit vratiIspitSaOvimID(String idIspit) {
 		return dao.vratiIspitSaOvimID(idIspit);
@@ -17,8 +18,11 @@ public class UpdateIspitService {
 		return dao.updateIspit(ispit);
 	}
 
-	public boolean proveriDaLiJeBroj(String poeni) {
-		return validacija.daLiJeBroj(poeni);
+	public boolean promeniPodatkeOIspitu(Ispit ispit, String checkIzasao, String checkPolozioPrakticni,
+			String checkPolozioUsmeni, String rok, String datum, String poeniNaPrakticnom, String poeniNaUsmenom,
+			String profesor) {
+		return common.promeniPodatkeOIspitu(ispit, checkIzasao, checkPolozioPrakticni,
+				checkPolozioUsmeni, rok, datum, poeniNaPrakticnom, poeniNaUsmenom, profesor);
 	}
 
 }

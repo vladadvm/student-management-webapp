@@ -98,7 +98,9 @@ public class Student {
 		this.ispiti = ispiti;
 	}
 	
-	
+	public void dodajIspit(Ispit ispit) {
+		this.ispiti.add(ispit);
+	}
 	
 
 }

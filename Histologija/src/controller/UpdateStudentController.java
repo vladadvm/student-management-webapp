@@ -32,35 +32,12 @@ public class UpdateStudentController extends HttpServlet {
 		String zabeleske = request.getParameter("zabeleske");
 		String ocena = request.getParameter("ocena");
 		
-		boolean daLiJeBroj = service.proveriDaLiJeBroj(grupa);
+		Student student = service.vratiStudentaSaOvimID(idStudent);
 		
-		if(daLiJeBroj) {
-			Student student = service.vratiStudentaSaOvimID(idStudent);
-			//moze metoda koja ovo radi umesto kontrolera
-			
-			if(!ime.isEmpty()) {
-				student.setIme(ime);
-			}
-			if(!prezime.isEmpty()) {
-				student.setPrezime(prezime);
-			}
-			if(!brojIndeksa.isEmpty()) {
-				student.setBrojIndeksa(brojIndeksa);
-			}
-			if(!grupa.isEmpty()) {
-				student.setGrupa(Integer.parseInt(grupa));
-			}
-			if(pol != null) {
-				student.setPol(pol);
-			}
-			if(!zabeleske.isEmpty()) {
-				student.setZabeleske(zabeleske);
-			}
-			if(!ocena.isEmpty()) {
-				student.setOcena(Integer.parseInt(ocena));
-			}
-			
-			
+		boolean daLiJePromenioPodatkeOStudentu = service.promeniPodatkeOStudentu(student, ime, prezime, brojIndeksa, grupa, pol,
+				zabeleske, ocena);
+		
+		if(daLiJePromenioPodatkeOStudentu) {
 			boolean daLiJeSnimioPromenjenogStudenta = service.updatePromenjenogStudenta(student);
 			
 			if(daLiJeSnimioPromenjenogStudenta) {
@@ -69,9 +46,13 @@ public class UpdateStudentController extends HttpServlet {
 				response.sendRedirect("html_files/neuspesno.html");
 			}
 		}else {
-			System.out.println("Nije unet int u polje grupa");
 			response.sendRedirect("html_files/neuspesno.html");
 		}
+		
+			
+			
+			
+			
 		
 		
 	}

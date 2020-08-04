@@ -23,6 +23,11 @@ public class UpdateStudentService {
 		return validacija.daLiJeBroj(grupa);
 	}
 
+	public boolean promeniPodatkeOStudentu(Student student, String ime, String prezime, String brojIndeksa,
+			String grupa, String pol, String zabeleske, String ocena) {
+		return common.promeniPodatkeOStudentu(student, ime, prezime, brojIndeksa, grupa, pol, zabeleske, ocena);
+	}
+
 	
 
 }

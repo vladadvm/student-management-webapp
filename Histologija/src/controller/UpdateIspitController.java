@@ -35,42 +35,23 @@ public class UpdateIspitController extends HttpServlet {
 		String profesor = request.getParameter("profesor");
 		
 		Ispit ispit = service.vratiIspitSaOvimID(idIspit);
-		boolean daLiJeBrojPoeniSaPrakticnog = service.proveriDaLiJeBroj(poeniNaPrakticnom);
-		boolean daLiJeBrojPoeniSaUsmenog = service.proveriDaLiJeBroj(poeniNaUsmenom);
-		//moze metoda koja ovo radi umesto kontrolera
 		
-		if(checkIzasao != null) {
-			ispit.setDaLiJeStudentIzasaoNaIspit(Boolean.parseBoolean(checkIzasao));
-		}
-		if(checkPolozioPrakticni != null) {
-			ispit.setDaLiJeStudentPolozioPrakticniIspit(Boolean.parseBoolean(checkPolozioPrakticni));
-		}
-		if(checkPolozioUsmeni != null) {
-			ispit.setDaLiJeStudentPolozioUsmeniIspit(Boolean.parseBoolean(checkPolozioUsmeni));
-		}
-		if(!rok.isEmpty()) {
-			ispit.setIspitniRok(rok);
-		}
-		if(!datum.isEmpty()) {
-			ispit.setDatumOdrzavanjaIspita(datum);
-		}
-		if(!poeniNaPrakticnom.isEmpty() && daLiJeBrojPoeniSaPrakticnog) {
-			ispit.setOsvojeniPoeniNaPrakticnom(Double.parseDouble(poeniNaPrakticnom));
-		}
-		if(!poeniNaUsmenom.isEmpty() && daLiJeBrojPoeniSaUsmenog) {
-			ispit.setOsvojeniPoeniNaUsmenom(Double.parseDouble(poeniNaUsmenom));
-		}
-		if(!profesor.isEmpty()) {
-			ispit.setDodeljenProfesor(profesor);
-		}
+		boolean daLiJePromenioPodatkeOIspitu = service.promeniPodatkeOIspitu(ispit, checkIzasao, checkPolozioPrakticni,
+				checkPolozioUsmeni, rok, datum, poeniNaPrakticnom, poeniNaUsmenom, profesor);
 		
-		boolean daLiJeSnimioPromenjenogIspita = service.updateIspit(ispit);
-		
-		if(daLiJeSnimioPromenjenogIspita) {
-			response.sendRedirect("html_files/uspesno.html");
+		if(daLiJePromenioPodatkeOIspitu) {
+			boolean daLiJeSnimioPromenjenogIspita = service.updateIspit(ispit);
+			if(daLiJeSnimioPromenjenogIspita) {
+				response.sendRedirect("html_files/uspesno.html");
+			}else {
+				response.sendRedirect("html_files/neuspesno.html");
+			}
 		}else {
 			response.sendRedirect("html_files/neuspesno.html");
 		}
+		
+		
+		
 		
 	}
 

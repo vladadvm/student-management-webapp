@@ -4,9 +4,13 @@ import model.Ispit;
 import model.Poeni;
 import model.Profesori;
 import model.Student;
+import validacija.Validacija;
 
 public class Common {
-
+	
+	
+	Validacija validacija = new Validacija();
+	
 	public Profesori kreirajProfesora(String ime, String prezime, String username, String password) {
 		
 		Profesori profesor = new Profesori();
@@ -82,6 +86,121 @@ public class Common {
 			ocena = 10;
 		}
 		return ocena;
+	}
+
+
+	public boolean dodajPoeneStudentu(String poeniNaIKol, String poeniNaIIKol, String poeniNaIIIKol,
+			String poeniSaVezbi, String poeniSaPredavanja, Student student) {
+		
+		boolean flag = false;
+		boolean daLiJeBrojIKol = validacija.daLiJeBroj(poeniNaIKol);
+        boolean daLiJeBrojIIKol = validacija.daLiJeBroj(poeniNaIIKol);
+        boolean daLiJeBrojIIIKol = validacija.daLiJeBroj(poeniNaIIIKol);
+        boolean daLiJeBrojVezbi = validacija.daLiJeBroj(poeniSaVezbi);
+        boolean daLiJeBrojPredavanja = validacija.daLiJeBroj(poeniSaPredavanja);
+        
+		if(!poeniNaIKol.isEmpty() && daLiJeBrojIKol) {
+        	student.getPoeni().setPoeniSaPrvogKolokvijuma(Double.parseDouble(poeniNaIKol));
+        	flag = true;
+        }
+        if(!poeniNaIIKol.isEmpty() && daLiJeBrojIIKol) {
+        	student.getPoeni().setPoeniSaDrugogKolokvijuma(Double.parseDouble(poeniNaIIKol));
+        	flag = true;
+        }
+        if(!poeniNaIIIKol.isEmpty() && daLiJeBrojIIIKol) {
+        	student.getPoeni().setPoeniSaTrecegKolokvijuma(Double.parseDouble(poeniNaIIIKol));
+        	flag = true;
+        }
+        if(!poeniSaVezbi.isEmpty() && daLiJeBrojVezbi) {
+        	student.getPoeni().setUkupanBrojPoenaSaVezbi(Double.parseDouble(poeniSaVezbi));
+        	flag = true;
+        }
+        if(!poeniSaPredavanja.isEmpty() && daLiJeBrojPredavanja) {
+        	student.getPoeni().setUkupniPoeniSaPredavanja(Integer.parseInt(poeniSaPredavanja));
+        	flag = true;
+        }
+        
+        return flag;
+	}
+
+	public boolean promeniPodatkeOIspitu(Ispit ispit, String checkIzasao, String checkPolozioPrakticni,
+			String checkPolozioUsmeni, String rok, String datum, String poeniNaPrakticnom, String poeniNaUsmenom,
+			String profesor) {
+		 
+		boolean flag = false;
+		boolean daLiJeBrojPoeniSaPrakticnog = validacija.daLiJeBroj(poeniNaPrakticnom);
+		boolean daLiJeBrojPoeniSaUsmenog = validacija.daLiJeBroj(poeniNaUsmenom);
+        
+		if(checkIzasao != null) {
+			ispit.setDaLiJeStudentIzasaoNaIspit(Boolean.parseBoolean(checkIzasao));
+			flag = true;
+		}
+		if(checkPolozioPrakticni != null) {
+			ispit.setDaLiJeStudentPolozioPrakticniIspit(Boolean.parseBoolean(checkPolozioPrakticni));
+			flag = true;
+		}
+		if(checkPolozioUsmeni != null) {
+			ispit.setDaLiJeStudentPolozioUsmeniIspit(Boolean.parseBoolean(checkPolozioUsmeni));
+			flag = true;
+		}
+		if(!rok.isEmpty()) {
+			ispit.setIspitniRok(rok);
+			flag = true;
+		}
+		if(!datum.isEmpty()) {
+			ispit.setDatumOdrzavanjaIspita(datum);
+			flag = true;
+		}
+		if(!poeniNaPrakticnom.isEmpty() && daLiJeBrojPoeniSaPrakticnog) {
+			ispit.setOsvojeniPoeniNaPrakticnom(Double.parseDouble(poeniNaPrakticnom));
+			flag = true;
+		}
+		if(!poeniNaUsmenom.isEmpty() && daLiJeBrojPoeniSaUsmenog) {
+			ispit.setOsvojeniPoeniNaUsmenom(Double.parseDouble(poeniNaUsmenom));
+			flag = true;
+		}
+		if(!profesor.isEmpty()) {
+			ispit.setDodeljenProfesor(profesor);
+			flag = true;
+		}
+        return flag;
+	}
+
+	public boolean promeniPodatkeOStudentu(Student student, String ime, String prezime, String brojIndeksa,
+			String grupa, String pol, String zabeleske, String ocena) {
+		boolean flag = false;
+		boolean daLiJeBroj = validacija.daLiJeBroj(grupa);
+		
+		if(!ime.isEmpty()) {
+			student.setIme(ime);
+			flag = true;
+		}
+		if(!prezime.isEmpty()) {
+			student.setPrezime(prezime);
+			flag = true;
+		}
+		if(!brojIndeksa.isEmpty()) {
+			student.setBrojIndeksa(brojIndeksa);
+			flag = true;
+		}
+		if(!grupa.isEmpty()) {
+			student.setGrupa(Integer.parseInt(grupa));
+			flag = true;
+		}
+		if(pol != null) {
+			student.setPol(pol);
+			flag = true;
+		}
+		if(!zabeleske.isEmpty()) {
+			student.setZabeleske(zabeleske);
+			flag = true;
+		}
+		if(!ocena.isEmpty()) {
+			student.setOcena(Integer.parseInt(ocena));
+			flag = true;
+		}
+		
+		return flag;
 	}
 
 	

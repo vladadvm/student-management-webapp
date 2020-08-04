@@ -17,7 +17,7 @@ public class DodajIspitDAO {
 		session.beginTransaction();
 		try {
 			Student student = session.get(Student.class, Integer.parseInt(idStudent));
-			student.getIspiti().add(ispit);
+			student.dodajIspit(ispit);
 			session.update(student);
 			session.getTransaction().commit();
 			System.out.println("Uspeo sam da spojim studenta i ispita");

@@ -43,6 +43,25 @@ public class DodajPoeneDAO {
 		}
 	}
 
+	public boolean dodajPoeneStudentuSaOvimID(String idStudent, Poeni poeni) {
+		Session session = factory.openSession();
+		session.beginTransaction();
+		try {
+			Student student = session.get(Student.class, Integer.parseInt(idStudent));
+			student.setPoeni(poeni);
+			session.update(student);
+			session.getTransaction().commit();
+			System.out.println("Dodao sam poene studentu " + student.getIme());
+			return true;
+		} catch (Exception e) {
+			System.out.println("Nisam dodao poene studentu");
+			session.getTransaction().rollback();
+			return false;
+		}finally {
+			session.close();
+		}
+	}
+
 	
 	
 }
